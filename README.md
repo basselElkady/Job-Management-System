@@ -68,11 +68,17 @@ To run all tests (unit, integration, and E2E), use the following command:  mvn c
 API Endpoints
 
 Method	Endpoint	Description
+
 POST	/v1/jobs	Create a new Job
+
 POST	/v1/jobs/batch	Create a batch of Jobs
+
 DELETE	/v1/jobs?name=desired name	Delete a Job (if not running)
+
 GET	/v1/jobs?status=desired status	Get Job status
+
 GET	v1/jobtype	Get a list of names for job types
+
 
 
 API description
