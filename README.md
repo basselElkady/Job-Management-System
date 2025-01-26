@@ -2,7 +2,7 @@
 High-Level System Design
 Architecture Overview
 The Job Management System follows key components:
-1.	Job API Service: Handles RESTful API requests for job creation, status retrieval, retrying failed jobs and Scheduler jobs
+1.	Job API Service: Handles RESTful API requests for job creation, priority jobs, status retrieval, retrying failed jobs and Scheduler jobs
 2.	Job Type : I did not expose creation for job type as you need to create your own task, just make sure to implement JobExecutor interface and then the app assign job type for the database by Job Factory
 3.	Job Executor Service: Processes jobs based on scheduling.
 4.	Message Queue (RabbitMQ): Enables asynchronous job processing.
@@ -102,7 +102,9 @@ Request body : {
     "name":"Enter your job name",
     "jobType": "Email", should be name of mentioned in job type database else it will fire an exception
     "schedule" : "2025-01-24T20:47:00"
+    "priority" : 5  
 }
+priority range from 1 (Lower)  to 10 (Higher) if you did not specify any priority it will automatically assign to 5  
 response HTTP code 200.OK 
 and it return Boolean True
 
