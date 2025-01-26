@@ -101,6 +101,7 @@ API description
 Job APIS
 
 Post: http://localhost:8080/v1/jobs
+
 Request body :
 
 {
@@ -111,12 +112,15 @@ Request body :
 }
 
 priority range from 1 (Lower)  to 10 (Higher) if you did not specify any priority it will automatically assign to 5
+
 JobType: should be name of mentioned in job type database else it will fire an exception (built-in Email, DataLoad)
-response HTTP code 200.OK 
+
+response HTTP code 200.OK, 
 and it return Boolean True
 
 
 Post: http://localhost:8080/v1/jobs/batch
+
 Request body : 
 
 [
@@ -146,7 +150,8 @@ and it return Boolean
 
 
 GET: http://localhost:8080/v1/jobs/{id}/status
-Response HTTP code 200.OK 
+
+Response HTTP code 200.OK, 
 and it return String with Job Status 
 
 
