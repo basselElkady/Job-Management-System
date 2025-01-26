@@ -15,12 +15,14 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-@AllArgsConstructor
 public class JobMapper {
 
-    @Autowired
     private JobTypeRepository jobTypeRepository;
 
+    @Autowired
+    public JobMapper(JobTypeRepository jobTypeRepository){
+        this.jobTypeRepository=jobTypeRepository;
+    }
     
     public MyJob jobRequestToJob(JobRequestDto jobRequest) {
 

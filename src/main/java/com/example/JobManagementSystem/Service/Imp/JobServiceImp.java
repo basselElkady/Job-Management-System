@@ -13,6 +13,7 @@ import com.example.JobManagementSystem.Model.MyJob;
 import com.example.JobManagementSystem.Producer.JobQueueProducer;
 import com.example.JobManagementSystem.Repository.JobRepository;
 import com.example.JobManagementSystem.Service.JobService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,8 @@ import java.util.List;
 @Transactional
 public class JobServiceImp implements JobService {
 
+    @Value("${pagination.pageSize}")
+    private int pageSize;
     private final JobRepository jobRepository;
     private final JobQueueProducer jobQueueProducer;
     private final JobMapper jobMapper;
@@ -97,7 +100,7 @@ public class JobServiceImp implements JobService {
     @Override
     public JobListResponse finAllJobs(int pageNumber) {
 
-        Page<MyJob> jobList = jobRepository.findAll(PageRequest.of(pageNumber, 10)); // i make it fixed here
+        Page<MyJob> jobList = jobRepository.findAll(PageRequest.of(pageNumber, pageSize)); // i make it fixed here
         List<ResponseJobDto> responseJobDtos= jobList.stream()
                 .map(jobMapper::jobToJobResponseDto)
                 .toList();

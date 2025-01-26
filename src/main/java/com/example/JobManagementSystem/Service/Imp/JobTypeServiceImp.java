@@ -9,20 +9,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class JobTypeServiceImp implements JobTypeService {
 
-    @Autowired
+    @Value("${pagination.pageSize}")
+    private int pageSize;
+
     private JobTypeRepository jobTypeRepository;
+
+    @Autowired
+    public JobTypeServiceImp(JobTypeRepository jobTypeRepository){
+        this.jobTypeRepository=jobTypeRepository;
+    }
+
+
+
 
     @Override
     public List<JobType> getAllJobTypes(int pageNumber) {
 
-        Page<JobType> jobTypes = jobTypeRepository.findAll(PageRequest.of(pageNumber, 10));  // i made it fixed here on purpose
+        Page<JobType> jobTypes = jobTypeRepository.findAll(PageRequest.of(pageNumber, pageSize));  // i made it fixed here on purpose
         return jobTypes.stream().toList();
 
 

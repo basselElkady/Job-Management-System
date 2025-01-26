@@ -16,11 +16,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/jobtype")
-@AllArgsConstructor
 public class JobTypeController {
 
-    @Autowired
     private JobTypeService jobTypeService;
+
+    @Autowired
+    public JobTypeController( JobTypeService jobTypeService){
+        this.jobTypeService=jobTypeService;
+    }
 
 
 

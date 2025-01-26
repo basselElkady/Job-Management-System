@@ -17,11 +17,6 @@ public class JobExecutorFactory {
 
     private final JobTypeRepository jobTypeRepository;
 
-//    @Autowired
-//    public JobExecutorFactory(Map<String, JobExecutor> executors, JobTypeRepository jobTypeRepository) {
-//        this.executors = executors;
-//        this.jobTypeRepository = jobTypeRepository;
-//    }
 
 
     @Autowired

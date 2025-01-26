@@ -33,8 +33,10 @@ public class JobWorkerImp implements JobWorker {
 
         @RabbitListener(queues = RabbitMQConfig.JOB_QUEUE)
         @Retryable(value = Exception.class,
-                maxAttempts = 3,
-                backoff = @Backoff(delay = 2000))
+                maxAttemptsExpression = "#{${retry.maxAttempts}}",
+                backoff = @Backoff(delayExpression = "#{${retry.delay}}"))
+//                maxAttempts = 3,
+//                backoff = @Backoff(delay = 2000))
         public void processJob(MyJob job) {
             job.setStatus(JobStatus.RUNNING);
             jobRepository.save(job);
