@@ -97,20 +97,28 @@ GET	v1/jobtype	Get a list of names for job types
 
 
 API description
+
+Job APIS
+
 Post: http://localhost:8080/v1/jobs
-Request body : {
+Request body :
+
+{
     "name":"Enter your job name",
-    "jobType": "Email", should be name of mentioned in job type database else it will fire an exception
+    "jobType": "Email",
     "schedule" : "2025-01-24T20:47:00"
     "priority" : 5  
 }
-priority range from 1 (Lower)  to 10 (Higher) if you did not specify any priority it will automatically assign to 5  
+
+priority range from 1 (Lower)  to 10 (Higher) if you did not specify any priority it will automatically assign to 5
+JobType: should be name of mentioned in job type database else it will fire an exception (built-in Email, DataLoad)
 response HTTP code 200.OK 
 and it return Boolean True
 
 
 Post: http://localhost:8080/v1/jobs/batch
 Request body : 
+
 [
     {
         "name": "104",
@@ -122,11 +130,13 @@ Request body :
         "jobType": "Email"
     }
 ]
+
 response HTTP code 200.OK 
 and it return Boolean 
 
 
-Delete: http://localhost:8080/v1/jobs?id=desired job id
+Delete: http://localhost:8080/v1/jobs?id={desired job id}
+
 Response HTTP code 200.OK 
 and it return Boolean 
 
@@ -142,25 +152,11 @@ and it return String with Job Status
 
 
 
+GET: http://localhost:8080/v1/jobs?pageNumber={page number you want to retrieve}
 
+response HTTP code 200 .OK 
 
-GET :  http://localhost:8080/v1/jobtype?pageNumber= page number you want to retrive
-
-response HTTP code 200.OK 
-and it return Object contain List<JobTypes name>
-
-{
-    "jobTypeName": [
-        "DataLoad",
-        "Email"
-    ]
-}
-I introduced the pagination if there is a lot of job 
-
-
-GET: http://localhost:8080/v1/jobs?pageNumber=page number you want to retrive
-response HTTP code 200.OK 
-and it return Object contain List<MyJob>
+and it returns Object containing List<MyJob>
 
 
 {
@@ -178,7 +174,27 @@ and it return Object contain List<MyJob>
 }
 
 
-// i created retrieve for data in pages in order as it was not mentioned 
+//I created retrieve for data in pages in order as it was not mentioned 
+
+
+
+Job Types APIs
+
+GET :  http://localhost:8080/v1/jobtype?pageNumber= {page number you want to retrieve}
+
+response HTTP code 200.OK 
+
+and it return Object contain List<JobTypes name>
+
+{
+    "jobTypeName": [
+        "DataLoad",
+        "Email"
+    ]
+}
+
+I introduced the pagination if there is a lot of job 
+
 
 
 
