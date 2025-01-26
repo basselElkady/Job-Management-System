@@ -36,7 +36,7 @@ docker run -d -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4.0-
     spring.rabbitmq.username=guest
     spring.rabbitmq.password=guest
     spring.rabbitmq.connection-timeout=PT10S
-5. # i used MySQL here is its configuration also 
+5. # i used MySQL here is its configuration also  // yet now H2 is the database used in the code
     spring.datasource.url=jdbc:mysql://localhost:3306/systemJobMangment
     spring.datasource.username=root
     spring.datasource.password=123456789
