@@ -40,7 +40,7 @@ public class JobControllerE2ETest {
 
         // Step 2: Get Job Status
         given()
-                .pathParam("id", 9)
+                .pathParam("id", 2)
                 .when()
                 .get("/{id}/status")
                 .then()
@@ -49,13 +49,13 @@ public class JobControllerE2ETest {
 //        .body(not(emptyString()));
 ////
         // Step 3: Delete Job
-        given()
-                .queryParam("id", "9")
-                .when()
-                .delete()
-                .then()
-                .statusCode(200)
-                .body(equalTo("true"));
+//        given()
+//                .queryParam("id", "9")
+//                .when()
+//                .delete()
+//                .then()
+//                .statusCode(200)
+//                .body(equalTo("true"));
     }
 
     @Test

@@ -33,6 +33,11 @@ public class JobMapper {
             throw new JobTypeNotFound("Job type does not exist: " + jobRequest.getJobType());
         }
         myJob.setJobType(jobTypeRepository.findByName(jobRequest.getJobType()).get());
+        if(jobRequest.getPriority() == null)
+            myJob.setPriority((byte) 5);
+        else
+            myJob.setPriority(jobRequest.getPriority());
+
         if(jobRequest.getschedule() == null)
             myJob.setScheduledTime(LocalDateTime.now());
         else if(jobRequest.getschedule().equals(LocalDateTime.now()))

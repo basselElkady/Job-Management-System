@@ -31,6 +31,8 @@ public class MyJob {
 
     private LocalDateTime scheduledTime;
 
+    private byte priority;
+
     public Long getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class MyJob {
 
     public void setScheduledTime(LocalDateTime scheduledTime) {
         this.scheduledTime = scheduledTime;
+    }
+
+    public byte getPriority() {
+        return priority;
+    }
+
+    public void setPriority(byte priority) {
+        this.priority = priority;
     }
 }

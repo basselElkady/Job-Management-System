@@ -23,6 +23,8 @@ public class JobRequestDto {
     @FutureOrPresent(message = "Scheduled time must be in the future or present")
     private LocalDateTime schedule;
 
+    private Byte priority;
+
 
     public String getName() {
         return name;
@@ -46,5 +48,14 @@ public class JobRequestDto {
 
     public void setSchedule(LocalDateTime schedule) {
         this.schedule = schedule;
+    }
+
+
+    public Byte getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Byte priority) {
+        this.priority = priority;
     }
 }

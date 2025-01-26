@@ -63,6 +63,12 @@ public class JobServiceImp implements JobService {
         return true;
     }
 
+//    @Override
+//    public boolean createBatchJobs(List<JobRequestDto> jobsRequestDto) {
+//        jobsRequestDto.forEach(this::createJob);
+//        return true;
+//    }
+
     @Override
     public boolean createBatchJobs(List<JobRequestDto> jobsRequestDto) {
         jobsRequestDto.forEach(this::createJob);
