@@ -25,8 +25,8 @@ public class JobTypeController {
 
 
     @GetMapping
-    public ResponseEntity<JobTypeNameResponse> getAllJobTypes() {
-        List<JobType> jobTypes = jobTypeService.getAllJobTypes();
+    public ResponseEntity<JobTypeNameResponse> getAllJobTypes(@RequestParam int pageNumber) {
+        List<JobType> jobTypes = jobTypeService.getAllJobTypes(pageNumber);
         List<String> result= jobTypes.stream()
                 .map(JobType::getName)
                 .toList();

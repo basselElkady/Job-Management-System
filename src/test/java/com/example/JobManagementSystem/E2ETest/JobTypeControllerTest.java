@@ -21,6 +21,7 @@ public class JobTypeControllerTest {
     @Test
     public void testGetAllJobTypes() {
         given()
+                .queryParam("pageNumber", 0)
                 .contentType(ContentType.JSON)
                 .when()
                 .get()

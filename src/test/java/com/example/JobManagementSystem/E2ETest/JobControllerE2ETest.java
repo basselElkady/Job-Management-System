@@ -17,6 +17,7 @@ public class JobControllerE2ETest {
         RestAssured.basePath = "/v1/jobs";
     }
 
+    // we should make sure that the delete id is there in the databsae first
     @Test
     public void testCreateAndDeleteJob() {
         // Create job payload
@@ -39,17 +40,17 @@ public class JobControllerE2ETest {
 
         // Step 2: Get Job Status
         given()
-                .pathParam("id", 1)
+                .pathParam("id", 9)
                 .when()
                 .get("/{id}/status")
                 .then()
                 .statusCode(200)
-                        //.body(equalTo("SUCCESS"));
-        .body(not(emptyString()));
-
+                .body(equalTo("SUCCESS"));
+//        .body(not(emptyString()));
+////
         // Step 3: Delete Job
         given()
-                .queryParam("id", "1")
+                .queryParam("id", "9")
                 .when()
                 .delete()
                 .then()

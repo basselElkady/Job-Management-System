@@ -3,6 +3,8 @@ package com.example.JobManagementSystem.Service.Imp;
 
 import com.example.JobManagementSystem.Configuration.JobScheduler;
 import com.example.JobManagementSystem.DTO.Request.JobRequestDto;
+import com.example.JobManagementSystem.DTO.Response.JobListResponse;
+import com.example.JobManagementSystem.DTO.Response.ResponseJobDto;
 import com.example.JobManagementSystem.Exception.JobNotFound;
 import com.example.JobManagementSystem.Exception.JobStatusIsRuning;
 import com.example.JobManagementSystem.Mapper.JobMapper;
@@ -11,7 +13,9 @@ import com.example.JobManagementSystem.Model.MyJob;
 import com.example.JobManagementSystem.Producer.JobQueueProducer;
 import com.example.JobManagementSystem.Repository.JobRepository;
 import com.example.JobManagementSystem.Service.JobService;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,7 +94,18 @@ public class JobServiceImp implements JobService {
         return jobRepository.findJobStatusById(id);
     }
 
+    @Override
+    public JobListResponse finAllJobs(int pageNumber) {
 
+        Page<MyJob> jobList = jobRepository.findAll(PageRequest.of(pageNumber, 10)); // i make it fixed here
+        List<ResponseJobDto> responseJobDtos= jobList.stream()
+                .map(jobMapper::jobToJobResponseDto)
+                .toList();
+        JobListResponse jobListResponse=new JobListResponse();
+        jobListResponse.setJobRequestDtos(responseJobDtos);
+        return jobListResponse;
+
+    }
 
 
 }

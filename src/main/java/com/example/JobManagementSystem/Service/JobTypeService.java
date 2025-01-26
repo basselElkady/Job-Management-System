@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface JobTypeService {
 
-    List<JobType> getAllJobTypes();
+    List<JobType> getAllJobTypes(int pageNumber);
 
 }

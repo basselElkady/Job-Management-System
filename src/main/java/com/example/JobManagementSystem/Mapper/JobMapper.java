@@ -2,6 +2,7 @@ package com.example.JobManagementSystem.Mapper;
 
 
 import com.example.JobManagementSystem.DTO.Request.JobRequestDto;
+import com.example.JobManagementSystem.DTO.Response.ResponseJobDto;
 import com.example.JobManagementSystem.Exception.InCorrectScheduledTime;
 import com.example.JobManagementSystem.Exception.JobTypeNotFound;
 import com.example.JobManagementSystem.Model.MyJob;
@@ -40,6 +41,16 @@ public class JobMapper {
         else
             myJob.setScheduledTime(jobRequest.getschedule());
         return myJob;
+    }
+
+
+
+    public ResponseJobDto jobToJobResponseDto(MyJob job){
+        ResponseJobDto responseJobDto= new ResponseJobDto();
+        responseJobDto.setId(job.getId());
+        responseJobDto.setName(job.getName());
+        responseJobDto.setJobType(job.getJobType().getName());
+        return responseJobDto;
     }
 
 }

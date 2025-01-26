@@ -2,6 +2,7 @@ package com.example.JobManagementSystem.Controller;
 
 
 import com.example.JobManagementSystem.DTO.Request.JobRequestDto;
+import com.example.JobManagementSystem.DTO.Response.JobListResponse;
 import com.example.JobManagementSystem.Service.JobService;
 
 import jakarta.validation.Valid;
@@ -54,6 +55,13 @@ public class JobController {
     public ResponseEntity<String> getJobStatus(@PathVariable Long id){
         String result= jobService.getJobStatus(id);
         return ResponseEntity.ok(result);
+    }
+
+
+    @GetMapping
+    public ResponseEntity<JobListResponse> getAllJobs(@RequestParam int pageNumber){
+        JobListResponse jobListResponse= jobService.finAllJobs(pageNumber);
+        return ResponseEntity.ok(jobListResponse);
     }
 
 
