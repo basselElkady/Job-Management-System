@@ -25,19 +25,30 @@ Ensure you have the following installed before proceeding:
 •	Docker (for rabbitMq)
 Building the System Locally
 1.	Clone the Repository
-2.	git clone https://github.com/your-repo/job-management-system.git
-cd job-management-system  --- my own ????????????????
+2.	git clone https://github.com/basselElkady/Job-Management-System.git
 3.	Configure the RabbitMq If using Docker, start a RabbitMq container:
 docker run -d -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4.0-management
 
 4.	# this is configuration for RabbitMq in Properties File
-spring.rabbitmq.host=localhost
-spring.rabbitmq.port=5672
-spring.rabbitmq.username=guest
-spring.rabbitmq.password=guest
-spring.rabbitmq.connection-timeout=PT10S
+    spring.rabbitmq.host=localhost
+    spring.rabbitmq.port=5672
+    spring.rabbitmq.username=guest
+    spring.rabbitmq.password=guest
+    spring.rabbitmq.connection-timeout=PT10S
+5. # i used MySQL here is its configuration also 
+    spring.datasource.url=jdbc:mysql://localhost:3306/systemJobMangment
+    spring.datasource.username=root
+    spring.datasource.password=123456789
+    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+    spring.jpa.hibernate.ddl-auto=update
+    spring.jpa.properties.hibernate.format_sql=true
+6. Additional config for fixed fields
+    retry.maxAttempts=3
+    retry.delay=2000
+    pagination.pageSize=10
+
 5.	Build the Project
-mvn clean install
+    mvn clean install
 Running the System Locally
 1.	Start the Application
 mvn spring-boot:run
@@ -46,7 +57,7 @@ http://localhost:8080/actuator/health
 Running the Test Suite
 # Running Tests
 
-This project uses different types of tests organized in three main packages:
+This project uses different types of tests organized into three main packages:
 - UnitTest
 - IntegrationTest
 - E2ETest  // you should run the app to execute these tests correctly
