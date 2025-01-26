@@ -169,30 +169,38 @@ Now, the job execution time will be displayed correctly for each user based on t
 
 
 •	If user want to execute a lot of jobs together and one of fire an exception all of the batch will not execute as it may be a jobs related to each other.
+
 •	I assumed that we can retry the same name of jobs multiple times so I did not make it unique
+
 •	No Job Dependencies Support
 Issue
 If Job B depends on Job A, there is no mechanism to ensure Job A completes before Job B starts.
 Future Fix
 Make a jobs field as a parent jobs in each job
 Ensure dependent jobs wait for their predecessors to complete.
+
 •	No Webhook Notifications for Job Events
 Issue
 •	Users don’t get real-time updates when a job succeeds or fails.
 Future Fix
 •	Send Webhook notifications when job events occur.
+
 •	No Role-Based Access Control (RBAC)
 Issue
 Currently, any user can delete, retry, or modify jobs.
 No access control to restrict job management actions.
 Future Fix
 Implement Spring Security with role-based permissions.
+
+
 •	No Rate Limiting for API Requests
 Issue
 No limits on how many jobs a user can submit per second.
 This makes the system vulnerable to DDoS attacks.
 Future Fix
 Use Spring Bucket4j to limit job creation requests per user.
+
+
 •	No Job Expiry or Auto-Cleanup
 Issue
 •	The database keeps storing old jobs forever.
