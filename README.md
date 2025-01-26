@@ -13,6 +13,7 @@ Workflow
 3.	The Job Executor Service picks up jobs based on scheduling rules.
 4.	The job is executed, and its status is updated (RUNNING → SUCCESS/FAILED).
 5.	If a job fails, it can be retried using the retry mechanism.
+6.	i create a global exception to make it easier for us to know the error 
 
 
 
@@ -114,6 +115,8 @@ Request body :
 priority range from 1 (Lower)  to 10 (Higher) if you did not specify any priority it will automatically assign to 5
 
 JobType: should be name of mentioned in job type database else it will fire an exception (built-in Email, DataLoad)
+
+schedule : if you didnot specify time it will be assigned for LocalTime.now
 
 response HTTP code 200.OK, 
 and it return Boolean True
