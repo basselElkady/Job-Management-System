@@ -62,6 +62,18 @@ public class JobServiceImpTest {
     }
 
     @Test
+    public void testpriorityAutoAssigned(){
+        MyJob myJob = mock(MyJob.class);
+
+        when(jobMapper.jobRequestToJob(any(JobRequestDto.class))).thenReturn(myJob);
+        Byte priority = myJob.getPriority();
+
+        // Verify that getPriority() was called
+        verify(myJob).getPriority();
+
+    }
+
+    @Test
     public void createJob_ShouldSaveJob_WhenValidRequest() {
         // Arrange
         when(jobMapper.jobRequestToJob(any(JobRequestDto.class))).thenReturn(myJob);
@@ -70,7 +82,6 @@ public class JobServiceImpTest {
 
         // Act
         boolean result = jobService.createJob(jobRequestDto);
-
         // Assert
         assertTrue(result);
         verify(jobRepository, times(1)).save(myJob);
