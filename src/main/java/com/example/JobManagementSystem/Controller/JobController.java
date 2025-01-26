@@ -6,6 +6,7 @@ import com.example.JobManagementSystem.DTO.Response.JobListResponse;
 import com.example.JobManagementSystem.Service.JobService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,16 @@ public class JobController {
         return ResponseEntity.ok(result);
 
     }
+
+
+    @PutMapping
+    public ResponseEntity<Boolean> retryJob(@RequestParam @NotNull Long id){
+
+        boolean result= jobService.retryJob(id);
+        return ResponseEntity.ok(result);
+
+    }
+
 
     @DeleteMapping
     public ResponseEntity<Boolean> deleteJob(@RequestParam Long id) {

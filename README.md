@@ -91,6 +91,8 @@ GET	/v1/jobs?status=desired status	Get Job status
 
 GET /v1/jobs?pageNumber=0  retrive pages 
 
+PUT v1/jobs?id={id}  retry Failed one
+
 GET	v1/jobtype	Get a list of names for job types
 
 
@@ -156,6 +158,13 @@ GET: http://localhost:8080/v1/jobs/{id}/status
 
 Response HTTP code 200.OK, 
 and it return String with Job Status 
+
+
+PUT: http://localhost:8080/v1/jobs?id={id}
+
+response HTTP code 200.OK, and it return Boolean true for approval that the job will retry
+
+if it return false this mean that the status of the job is not Failed
 
 
 

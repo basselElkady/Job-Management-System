@@ -17,4 +17,6 @@ public interface JobService {
 
     JobListResponse finAllJobs(int pageSize);
 
+    public boolean retryJob(Long id);
+
 }

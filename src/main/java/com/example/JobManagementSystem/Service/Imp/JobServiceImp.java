@@ -63,6 +63,26 @@ public class JobServiceImp implements JobService {
         return true;
     }
 
+
+    public boolean retryJob(Long id) {
+        MyJob myJob = jobRepository.findById(id).orElseThrow(
+                () -> new JobNotFound("job not found with this id"+id)
+        );
+
+        if(myJob.getStatus() != JobStatus.FAILED) {
+            return false;
+        }
+
+        myJob.setStatus(JobStatus.QUEUED);
+        myJob.setScheduledTime(LocalDateTime.now());
+        jobQueueProducer.sendJob(myJob);
+        jobRepository.save(myJob);
+
+        return true;
+    }
+
+
+
 //    @Override
 //    public boolean createBatchJobs(List<JobRequestDto> jobsRequestDto) {
 //        jobsRequestDto.forEach(this::createJob);
