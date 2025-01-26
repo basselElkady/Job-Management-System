@@ -110,11 +110,13 @@ Request body :
 {
     "name":"Enter your job name",
     "jobType": "Email",
-    "schedule" : "2025-01-24T20:47:00"
+    "schedule" : "2025-01-24T20:47:00",
     "priority" : 5  
 }
 
-priority range from 1 (Lower)  to 10 (Higher) if you did not specify any priority it will automatically assign to 5
+priority range from 0 (Lower)  to 10 (Higher) if you did not specify any priority it will automatically assign to 5
+if you mentioned priority more than 10 it will assign to 10 
+less than 0 it will fire an error
 
 JobType: should be name of mentioned in job type database else it will fire an exception (built-in Email, DataLoad)
 

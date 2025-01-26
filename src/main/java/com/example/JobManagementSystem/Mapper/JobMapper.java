@@ -35,9 +35,13 @@ public class JobMapper {
         myJob.setJobType(jobTypeRepository.findByName(jobRequest.getJobType()).get());
         if(jobRequest.getPriority() == null)
             myJob.setPriority((byte) 5);
-        else
-            myJob.setPriority(jobRequest.getPriority());
-
+        else {
+            byte priority = jobRequest.getPriority();
+            if (priority < 0) {
+                throw new IllegalArgumentException("Priority cannot be less than 0");
+            }
+            myJob.setPriority((byte) Math.min(priority, 10));
+        }
         if(jobRequest.getschedule() == null)
             myJob.setScheduledTime(LocalDateTime.now());
         else if(jobRequest.getschedule().equals(LocalDateTime.now()))
