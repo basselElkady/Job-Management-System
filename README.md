@@ -77,7 +77,11 @@ DELETE	/v1/jobs?name=desired name	Delete a Job (if not running)
 
 GET	/v1/jobs?status=desired status	Get Job status
 
+GET /v1/jobs?pageNumber=0  retrive pages 
+
 GET	v1/jobtype	Get a list of names for job types
+
+
 
 
 
@@ -127,7 +131,7 @@ and it return String with Job Status
 
 
 
-GET : http://localhost:8080/v1/jobtype
+GET :  http://localhost:8080/v1/jobtype?pageNumber= page number you want to retrive
 
 response HTTP code 200.OK 
 and it return Object contain List<JobTypes name>
@@ -138,6 +142,31 @@ and it return Object contain List<JobTypes name>
         "Email"
     ]
 }
+I introduced the pagination if there is a lot of job 
+
+
+GET: http://localhost:8080/v1/jobs?pageNumber=page number you want to retrive
+response HTTP code 200.OK 
+and it return Object contain List<MyJob>
+
+
+{
+    "jobRequestDtos": [
+        {
+            "id": 2,
+            "name": "100",
+            "jobType": "DataLoad"
+        },
+        {
+            "id": 3,
+            "name": null,
+            "jobType": "DataLoad"
+        }
+}
+
+
+// i created retrieve for data in pages in order as it was not mentioned 
+
 
 
 
@@ -174,45 +203,45 @@ Now, the job execution time will be displayed correctly for each user based on t
 
 
 
-•	If user want to execute a lot of jobs together and one of fire an exception all of the batch will not execute as it may be a jobs related to each other.
+•	If a user wants to execute a lot of jobs together and one of them fires an exception all of the batche will not execute as they may be jobs related to each other.
 
 •	I assumed that we can retry the same name of jobs multiple times so I did not make it unique
 
 •	No Job Dependencies Support
 Issue
-If Job B depends on Job A, there is no mechanism to ensure Job A completes before Job B starts.
+    If Job B depends on Job A, there is no mechanism to ensure Job A completes before Job B starts.
 Future Fix
-Make a jobs field as a parent jobs in each job
-Ensure dependent jobs wait for their predecessors to complete.
+    Make a jobs field as a parent jobs in each job
+    Ensure dependent jobs wait for their predecessors to complete.
 
 •	No Webhook Notifications for Job Events
 Issue
-•	Users don’t get real-time updates when a job succeeds or fails.
+    •	Users don’t get real-time updates when a job succeeds or fails.
 Future Fix
-•	Send Webhook notifications when job events occur.
+    •	Send Webhook notifications when job events occur.
 
 •	No Role-Based Access Control (RBAC)
 Issue
-Currently, any user can delete, retry, or modify jobs.
-No access control to restrict job management actions.
+    Currently, any user can delete, retry, or modify jobs.
+    No access control to restrict job management actions.
 Future Fix
-Implement Spring Security with role-based permissions.
+    Implement Spring Security with role-based permissions.
 
 
 •	No Rate Limiting for API Requests
 Issue
-No limits on how many jobs a user can submit per second.
-This makes the system vulnerable to DDoS attacks.
+    No limits on how many jobs a user can submit per second.
+    This makes the system vulnerable to DDoS attacks.
 Future Fix
-Use Spring Bucket4j to limit job creation requests per user.
+    Use Spring Bucket4j to limit job creation requests per user.
 
 
 •	No Job Expiry or Auto-Cleanup
 Issue
-•	The database keeps storing old jobs forever.
-•	Over time, this slows down queries and wastes storage.
+    •	The database keeps storing old jobs forever.
+    •	Over time, this slows down queries and wastes storage.
 Future Fix
-•	Implement job expiration and auto-delete old jobs. (@Scheduled(corn job))
+    •	Implement job expiration and auto-delete old jobs. (@Scheduled(corn job))
 
 
 
@@ -228,6 +257,7 @@ And then use AWS to get rid of the headache of all the infrastructure
 In addition to CICD 
 Automates deployment for seamless updates.
  Ensures quality through automated testing.
+ Ensure seamless Deployment/Delivery
 
 These steps should allow you to quickly set up and run the Job Management System on your local machine.
 
