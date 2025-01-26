@@ -5,7 +5,7 @@ The Job Management System follows key components:
 1.	Job API Service: Handles RESTful API requests for job creation, status retrieval, retrying failed jobs and Scheduler jobs
 2.	Job Type : I did not expose creation for job type as you need to create your own task, just make sure to implement JobExecutor interface and then the app assign job type for the database by Job Factory
 3.	Job Executor Service: Processes jobs based on scheduling.
-4.	Message Queue (RabbitMQ/Kafka - Optional): Enables asynchronous job processing.
+4.	Message Queue (RabbitMQ): Enables asynchronous job processing.
 5.	Scheduler Module: Handles job execution timing (immediate or scheduled).
 Workflow
 1.	A client submits a job via the Job API Service.
